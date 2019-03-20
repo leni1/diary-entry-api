@@ -11,7 +11,7 @@ diary = Blueprint('diary_app', __name__)
 
 
 @diary.route('/entries', methods=['POST'])
-def create_request():
+def create_entry():
     json_data = request.get_json()
     title = json_data['title']
     content = json_data['content']
