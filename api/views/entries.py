@@ -25,3 +25,11 @@ def create_request():
         diary_entry_db.append(new_ent)
         return jsonify({'Entry created': vars(new_ent)}), 201
     return jsonify(message='No request created'), 400
+
+
+@diary.route('/entries/<int:entryId>', methods=['GET'])
+def get_entry(entryId):
+    for ent in diary_entry_db:
+        if ent.eid == entryId:
+            return jsonify({'Entry found': vars(ent)}), 200
+        return jsonify(message='Not found'), 404
