@@ -1,12 +1,12 @@
 import re
-from datetime import date
 
 
 class Diary:
 
-    def __init__(self, date, title, content):
+    def __init__(self, eid, edate, title, content):
+        self.eid = eid
         self.title = title
-        self.date = date
+        self.edate = edate
         self.content = content
 
 
@@ -27,10 +27,3 @@ class Helper:
         if valid_title and valid_content:
             return True
         return False
-
-    def create_entry(self, title, content):
-
-        if self.check_entry(title, content):
-            entry_date = date.today()
-            entry = Diary(entry_date, title, content)
-            return entry
