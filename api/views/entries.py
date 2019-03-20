@@ -44,13 +44,12 @@ def get_entries():
 @diary.route('/entries/<int:entryId>', methods=['PUT'])
 def update_entry(entryId):
     json_data = request.get_json()
-    title = json_data['title']
-    content = json_data['content']
+
     for ent in diary_entry_db:
         if ent.eid == entryId:
-            if title:
-                ent.title = title
+            if json_data['title']:
+                ent.title = json_data['title']
                 return jsonify({'Entry updated': vars(ent)}), 201
-            if content:
-                ent.content = content
+            if json_data['content']:
+                ent.content = json_data['content']
                 return jsonify({'Entry updated': vars(ent)}), 201
