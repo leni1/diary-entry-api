@@ -33,3 +33,9 @@ def get_entry(entryId):
         if ent.eid == entryId:
             return jsonify({'Entry found': vars(ent)}), 200
         return jsonify(message='Not found'), 404
+
+
+@diary.route('/entries/', methods=['GET'], )
+def get_entries():
+    all_entries = [vars(ent) for ent in diary_entry_db]
+    return jsonify({'All entries': all_entries}), 200
