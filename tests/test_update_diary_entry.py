@@ -23,7 +23,8 @@ def test_update_title_success():
         '/api/v1/entries/{}'.format(ent_id),
         content_type='application/json',
         data=json.dumps(
-            dict(title='New Title')
+            dict(title='New Title',
+                 content='New content.')
         )
     )
 
