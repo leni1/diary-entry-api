@@ -35,7 +35,22 @@ def get_entry(entryId):
         return jsonify(message='Not found'), 404
 
 
-@diary.route('/entries/', methods=['GET'], )
+@diary.route('/entries/', methods=['GET'])
 def get_entries():
     all_entries = [vars(ent) for ent in diary_entry_db]
     return jsonify({'All entries': all_entries}), 200
+
+
+@diary.route('/entries/<int:entryId>', methods=['PUT'])
+def update_entry(entryId):
+    json_data = request.get_json()
+    title = json_data['title']
+    content = json_data['content']
+    for ent in diary_entry_db:
+        if ent.eid == entryId:
+            if title:
+                ent.title = title
+                return jsonify({'Entry updated': vars(ent)}), 201
+            if content:
+                ent.content = content
+                return jsonify({'Entry updated': vars(ent)}), 201
